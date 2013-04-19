@@ -2,10 +2,10 @@
 Sex Machine
 ===========
 
-This package uses the underlying data from the program "gender" by Jorg Michael (described `here <http://www.autohotkey.com/community/viewtopic.php?t=22000>`_).  It's use is pretty straightforward::
+This package uses the underlying data from the program "gender" by Jorg Michael (described `here <http://www.autohotkey.com/community/viewtopic.php?t=22000>`_).  Its use is pretty straightforward::
 
-    >>> import sexmachine.detector
-    >>> d = sexmachine.detector.Detector()
+    >>> import sexmachine.detector as gender
+    >>> d = gender.Detector()
     >>> d.get_gender(u"Bob")
     u'male'
     >>> d.get_gender(u"Sally")
@@ -13,7 +13,11 @@ This package uses the underlying data from the program "gender" by Jorg Michael 
     >>> d.get_gender(u"Pauley") # should be androgynous
     u'andy'
 
-The result will be one of ``andy`` (androgynous), ``male``, ``female``, ``mostly_male``, or ``mostly_female``.  Any unknown names are considered andies.
+The result will be one of ``andy`` (androgynous), ``male``, ``female``, ``mostly_male``, or ``mostly_female``.  Any unknown names are considered andies. Moreover, you can set unknown value to whatever you want::
+    
+    >>> d = gender.Detector(unknown_value=u"ferhat")
+    >>> d.get_gender(u"Pauley")
+    u'ferhat'
 
 I18N is fully supported::
 
@@ -27,7 +31,7 @@ Additionally, you can give preference to specific countries::
     >>> d.get_gender(u"Jamie", u'great_britain')
     u'mostly_male'
 
-If you have an alternative data file, you can pass that in as an optional filename argument to the Detector.  Additionally, you can create a detector that is not case sensitive (default *is* to be case sensitive)::
+Additionally, you can create a detector that is not case sensitive (default *is* to be case sensitive)::
 
     >>> d = sexmachine.detector.Detector(case_sensitive=False)
     >>> d.get_gender(u"sally")
@@ -35,7 +39,7 @@ If you have an alternative data file, you can pass that in as an optional filena
     >>> d.get_gender(u"Sally")
     u'female'
 
-Try to avoid creating many Detectors, as each creation means reading in the data file.
+Try to avoid creating many Detectors, as each creation means reading the data file.
 
 Licenses
 ========

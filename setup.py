@@ -6,8 +6,8 @@ setup(
     author='Ferhat Elmas',
     author_email='elmas.ferhat@gmail.com',
     packages=['sexmachine', 'sexmachine.test'],
-    url='http://pypi.python.org/pypi/SexMachine/',
-    license='LICENSE.txt',
+    url='https://github.com/ferhatelmas/sexmachine/',
+    license='GPLv3',
     description='Get the gender from first name.',
     long_description=open('README.rst').read(),
 )
