@@ -2,6 +2,14 @@
 Sex Machine
 ===========
 
+PyPI status:
+
+.. image:: https://pypip.in/v/SexMachine/badge.png
+    :target: https://pypi.python.org/pypi/SexMachine/
+
+.. image:: https://pypip.in/d/SexMachine/badge.png
+    :target: https://pypi.python.org/pypi/SexMachine/
+
 This package uses the underlying data from the program "gender" by Jorg Michael (described `here <http://www.autohotkey.com/community/viewtopic.php?t=22000>`_).  Its use is pretty straightforward::
 
     >>> import sexmachine.detector as gender
