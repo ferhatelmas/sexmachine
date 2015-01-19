@@ -1,4 +1,7 @@
+"""Mapper for special chars."""
+
 # -*- coding: utf-8 -*-
+import six
 mappings = ((256, ["<A/>"]),
             (257, ["<a/>"]),
             (258, ["<Â>"]),
@@ -70,7 +73,19 @@ mappings = ((256, ["<A/>"]),
 
 
 def map_name(u):
+    """Map a string.
+
+    Args:
+        u (''str''): string to convert.
+    Return:
+        Converted string.
+    """
     for code, patterns in mappings:
         for pattern in patterns:
-            u = u.replace(pattern.decode("utf-8"), unichr(code))
+
+            # Workaround for special chars who don't work with py2.
+            if six.PY2:
+                u = u.replace(pattern.decode("utf-8"), unichr(code))
+            elif six.PY3:
+                u = u.replace(six.u(pattern), six.unichr(code))
     return u
