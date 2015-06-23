@@ -2,6 +2,12 @@
 Sex Machine
 ===========
 
+Fork comments:
+
+Quickly changed a few lines so it works in python 3. No checks to test if python 2
+still works have been done. One test case fails where 'mosty_female' doesn't match
+'female'. Quick manual tests looks promising though.
+
 PyPI status:
 
 .. image:: https://pypip.in/v/SexMachine/badge.png
