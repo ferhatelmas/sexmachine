@@ -1,6 +1,5 @@
 import os.path
 import codecs
-from .mapping import map_name
 
 
 class NoCountryError(Exception):
@@ -33,10 +32,8 @@ class Detector:
     def _parse(self, filename):
         """Opens data file and for each line, calls _eat_name_line"""
         self.names = {}
-        with codecs.open(filename, encoding="iso8859-1") as f:
+        with codecs.open(filename, encoding="utf-8") as f:
             for line in f:
-                if any(map(lambda c: 128 < ord(c) < 160, line)):
-                    line = line.encode("iso8859-1").decode("windows-1252")
                 self._eat_name_line(line.strip())
 
     def _eat_name_line(self, line):
@@ -44,7 +41,7 @@ class Detector:
         if line[0] not in "#=":
             parts = line.split()
             country_values = line[30:-1]
-            name = map_name(parts[1])
+            name = parts[1]
             if not self.case_sensitive:
                 name = name.lower()
 
@@ -77,8 +74,8 @@ class Detector:
             return self.unknown_value
 
         max_count, max_tie = (0, 0)
-        best = self.names[name].keys()[0]
-        for gender, country_values in self.names[name].items():
+        best = list(self.names[name].keys())[0]
+        for gender, country_values in list(self.names[name].items()):
             count, tie = counter(country_values)
             if count > max_count or (count == max_count and tie > max_tie):
                 max_count, max_tie, best = count, tie, gender
@@ -94,9 +91,9 @@ class Detector:
             return self.unknown_value
         elif not country:
             def counter(country_values):
-                country_values = map(ord, country_values.replace(" ", ""))
+                country_values = list(map(ord, country_values.replace(" ", "")))
                 return (len(country_values),
-                        sum(map(lambda c: c > 64 and c-55 or c-48, country_values)))
+                        sum([c > 64 and c-55 or c-48 for c in country_values]))
             return self._most_popular_gender(name, counter)
         elif country in self.__class__.COUNTRIES:
             index = self.__class__.COUNTRIES.index(country)
