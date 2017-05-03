@@ -49,6 +49,11 @@ Additionally, you can create a detector that is not case sensitive (default *is*
 
 Try to avoid creating many Detectors, as each creation means reading the data file.
 
+Python 3 support
+================
+If you're using Python 3+, please refer to refer to this fork: https://pypi.python.org/pypi/gender-guesser/
+
+
 Licenses
 ========
 
